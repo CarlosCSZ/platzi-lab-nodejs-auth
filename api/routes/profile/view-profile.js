@@ -10,8 +10,9 @@ viewUser.get(
 
   // @todo: Ver información del usuario actual según la sesión del token JWT
   async (request, response) => {
-    return response.status(200).json({
-      //
+    const users = await UserModel.find({});
+    return response.status(200).send({
+      users
     });
   }
 );
