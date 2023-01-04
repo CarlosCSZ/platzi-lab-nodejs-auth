@@ -1,6 +1,7 @@
 import { Router, Request, Response } from "express";
 // import { body, check, validationResult } from 'express-validator';
-// import { UserModel } from '../models/User';
+import { createUser } from "../services/user";
+import { httpError } from "../utils/errorHandler";
 
 export const signUp = Router();
 
@@ -25,20 +26,17 @@ signUp.post('/',
       //   return response.status(400).json({ errors: errors.array() });
       // }
 
-      // const { username, password } = request.body;
+      const { username, password } = req.body;
 
-      // const user = await UserModel.create({ username, password });
+      const user = await createUser({ username, password });
 
       // return response
       //   .status(201)
       //   .json({ username: user.username, createdAt: user.createdAt });
-      res.send({ data:"data" });
+      res.send({ data:user });
     } catch (error) {
       console.error(`[signIn]: ${error}`);
-
-      return res.status(500).json({
-        error: 'An unexpected error happened. Please try again later',
-      });
+      httpError(res, 'ERROR_SINGINUP');
     }
   }
 );

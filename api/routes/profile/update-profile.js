@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { body, check, validationResult } from 'express-validator';
-import { UserModel } from '../../models/User.js';
+import { UserModel } from '../../models/user.js';
 
 export const updateUser = Router();
 
