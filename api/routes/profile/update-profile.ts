@@ -1,14 +1,13 @@
 import { Router } from 'express';
 import { body, check, validationResult } from 'express-validator';
-import { UserModel } from '../../models/user.js';
 
-export const deleteUser = Router();
+export const updateUser = Router();
 
-deleteUser.delete(
+updateUser.put(
   '/',
   // @todo: Validación y sanitización de los datos de entrada
 
-  // @todo: Eliminar el usuario actual según la sesión del token JWT
+  // @todo: Actualizar información usuario según la sesión del token JWT
   async (request, response) => {
     return response.status(200).json({
       //
