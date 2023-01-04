@@ -1,11 +1,11 @@
-import { Router, Request, Response } from "express";
+import { Router } from "express";
+import { register } from "../controller/auth";
 // import { body, check, validationResult } from 'express-validator';
-import { createUser } from "../services/user";
-import { httpError } from "../utils/errorHandler";
+
 
 export const signUp = Router();
 
-signUp.post('/',
+signUp.post('/', register
   // Validación y sanitización de los datos de entrada
   // body('username').not().isEmpty().trim(),
   // check('username').custom(async (username) => {
@@ -19,21 +19,4 @@ signUp.post('/',
   // body('password').isLength({ min: 6 }),
 
   //
-  async (req: Request, res: Response) => {
-    try {
-      // const errors = validationResult(request);
-      // if (!errors.isEmpty()) {
-      //   return response.status(400).json({ errors: errors.array() });
-      // }
-
-      const { username, password } = req.body;
-
-      const user = await createUser({ username, password });
-
-      res.send({ user });
-    } catch (error) {
-      console.error(`[signIn]: ${error}`);
-      httpError(res, 'ERROR_SINGINUP');
-    }
-  }
 );

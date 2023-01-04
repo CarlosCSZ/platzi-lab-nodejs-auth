@@ -1,7 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import { signUp } from './routes/sign-up';
-import { login } from './routes/login';
+import { logIn } from './routes/login';
 // import { profile } from './routes/profile/index.js';
 
 export const app = express();
@@ -15,7 +15,7 @@ app.use(express.json());
 // @todo: Almancenar el password de forma segura
 app.use('/api/v1/sign-up', signUp);
 // @todo: generar un token jwt seguro para la sesión del usuario
-app.use('/api/v1/login', login);
+app.use('/api/v1/login', logIn);
 // @todo: completar las rutas de profile
 // app.use('/api/v1/profile', profile);
 
