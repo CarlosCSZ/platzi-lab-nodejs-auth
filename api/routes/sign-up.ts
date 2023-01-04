@@ -30,10 +30,7 @@ signUp.post('/',
 
       const user = await createUser({ username, password });
 
-      // return response
-      //   .status(201)
-      //   .json({ username: user.username, createdAt: user.createdAt });
-      res.send({ data:user });
+      res.send({ user });
     } catch (error) {
       console.error(`[signIn]: ${error}`);
       httpError(res, 'ERROR_SINGINUP');
