@@ -2,8 +2,9 @@ import { verifyToken } from "../utils/jwtHandler";
 import { userModel } from "../models/user";
 import { NextFunction, Request, Response } from "express";
 import { httpError } from "../utils/errorHandler";
+import { check } from "express-validator";
 
-const authMiddleware = async (req: Request, res:Response, next: NextFunction) => {
+const authMiddleware = async (req: Request, res: Response, next: NextFunction) => {
   try{
     const token = req.headers.authorization?.split(" ")[1];
     if(!token){
@@ -16,8 +17,8 @@ const authMiddleware = async (req: Request, res:Response, next: NextFunction) =>
       httpError(res, 'Error del ID del token', 401);
       return
     };
-    await userModel.findOne({token});
-    next();
+    // const user = await userModel.findOne({token});
+    next()
   }catch(error){
     console.error(`[Session]: ${ error }`)
     httpError(res, 'UNEXPECTEED_ERROR_TOKEN', 401);

@@ -16,9 +16,9 @@ const tokenSign = async (name: string) => {
 
 const verifyToken = async (tokenJWT: string) => {
   try{
-      return verify(tokenJWT, JWT_SECRET);
+    return verify(tokenJWT, JWT_SECRET);
   }catch (e) {
-      return null
+    return null
   }
 };
 

@@ -14,6 +14,8 @@ const createUser = async ({ username, password }: User) => {
     password: encrypting
   };
   const user = await userModel.create(data);
+  user.set("password", undefined, { strict: false });
+
   const registration = {
     token: await tokenSign(user.username),
     username: user.username
