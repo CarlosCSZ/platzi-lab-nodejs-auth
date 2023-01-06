@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { updateUser, viewUsers } from '../services/user';
+import { deleteUser, updateUser, viewUsers } from '../services/user';
 import { httpError } from '../utils/errorHandler';
 
 const getItems = async ( req:Request, res: Response ) => {
@@ -15,10 +15,10 @@ const getItems = async ( req:Request, res: Response ) => {
 
 const updateItem = async ( req:Request, res: Response ) => {
   try{
-    const { username, password } = req.body;
+    const { username} = req.body;
     const { whom } = req.params;
     const user = <string>req.headers.host;
-    const update = await updateUser({username, password}, user, whom);
+    const update = await updateUser(username, user, whom);
 
     res.status(200).send(update);
   }catch(error){
@@ -29,11 +29,11 @@ const updateItem = async ( req:Request, res: Response ) => {
 
 const deleteItem = async ( req:Request, res: Response ) => {
   try{
-    const { username, password } = req.body;
-    const users = "deleteItem";
-    res.status(200).send({
-      users
-    });
+    const { whom } = req.params;
+    const user = <string>req.headers.host;
+    const depleting = await deleteUser(user, whom);
+
+    res.status(200).send({ depleting });
   }catch(error){
     console.error(`[deleting]: ${error}`);
     httpError(res, 'ERROR_DELETING_USER', 401);

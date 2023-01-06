@@ -5,7 +5,7 @@ import authMiddleware from '../../middlewares/session';
 
 export const deleteUser = Router();
 
-deleteUser.delete('/', authMiddleware, deleteItem
+deleteUser.delete('/:whom', authMiddleware, deleteItem
   // @todo: Validación y sanitización de los datos de entrada
 
   // @todo: Eliminar el usuario actual según la sesión del token JWT

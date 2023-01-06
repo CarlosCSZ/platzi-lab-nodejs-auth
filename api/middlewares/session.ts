@@ -1,8 +1,6 @@
 import { verifyToken } from "../utils/jwtHandler";
-import { userModel } from "../models/user";
 import { NextFunction, Request, Response } from "express";
 import { httpError } from "../utils/errorHandler";
-import { check } from "express-validator";
 
 interface ICheckToken {
   id: string;
