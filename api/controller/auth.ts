@@ -6,7 +6,6 @@ import { httpError } from '../utils/errorHandler';
 const register = async (req: Request, res: Response) => {
   try {
     const { username, password } = req.body;
-
     const user = await createUser({ username, password });
 
     res.send({ user });

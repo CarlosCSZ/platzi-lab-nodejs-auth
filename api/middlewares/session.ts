@@ -4,6 +4,12 @@ import { NextFunction, Request, Response } from "express";
 import { httpError } from "../utils/errorHandler";
 import { check } from "express-validator";
 
+interface ICheckToken {
+  id: string;
+  iat: number;
+  exp: number;
+};
+
 const authMiddleware = async (req: Request, res: Response, next: NextFunction) => {
   try{
     const token = req.headers.authorization?.split(" ")[1];
@@ -12,12 +18,12 @@ const authMiddleware = async (req: Request, res: Response, next: NextFunction) =
       return
     };
 
-    const checkToken = await verifyToken(token);
+    const checkToken = await verifyToken(token) as ICheckToken;
     if (!checkToken){
       httpError(res, 'Error del ID del token', 401);
       return
     };
-    // const user = await userModel.findOne({token});
+    req.headers.host = checkToken.id
     next()
   }catch(error){
     console.error(`[Session]: ${ error }`)

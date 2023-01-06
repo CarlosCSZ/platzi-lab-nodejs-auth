@@ -9,8 +9,16 @@ const viewUsers = async () => {
   return user
 };
 
-const updateUser = async ({ username, password }: User) => {
-
+const updateUser = async ({ username, password }: User, user: string, whom:string) => {
+  let data:(object)[] = [];
+  if(user === whom){
+    const user = await userModel.findOneAndUpdate({_id:whom}, {username, password});
+    const userUpt = await userModel.findById(whom);
+    data.push({user, userUpt});
+  }else{
+    throw new Error("USER_NOT_MATCHED")
+  }
+  return data
 };
 
 const deleteUser = async ({ username, password }: User) => {

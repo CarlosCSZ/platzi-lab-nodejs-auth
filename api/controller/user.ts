@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { viewUsers } from '../services/user';
+import { updateUser, viewUsers } from '../services/user';
 import { httpError } from '../utils/errorHandler';
 
 const getItems = async ( req:Request, res: Response ) => {
@@ -16,11 +16,11 @@ const getItems = async ( req:Request, res: Response ) => {
 const updateItem = async ( req:Request, res: Response ) => {
   try{
     const { username, password } = req.body;
-    const users = "updateItem";
-    console.log("request", req);
-    res.status(200).send({
-      users
-    });
+    const { whom } = req.params;
+    const user = <string>req.headers.host;
+    const update = await updateUser({username, password}, user, whom);
+
+    res.status(200).send(update);
   }catch(error){
     console.error(`[update]: ${error}`);
     httpError(res, 'ERROR_UPDATING_USER', 401);

@@ -17,7 +17,7 @@ const createUser = async ({ username, password }: User) => {
   user.set("password", undefined, { strict: false });
 
   const registration = {
-    token: await tokenSign(user.username),
+    token: await tokenSign(user._id.toString()),
     username: user.username
   };
   return registration
@@ -32,11 +32,12 @@ const loginUser = async ({ username, password }: User) => {
   if (!isPasswordValid) {
     throw new Error('USERNAME OR PASSWORD IS INCORRECT');
   };
+  user.set("password", undefined, { strict: false });
+
   const login =  {
-    token: await tokenSign(user.username),
+    token: await tokenSign(user._id.toString()),
     username: user.username
   };
-
   return login;
 }
 

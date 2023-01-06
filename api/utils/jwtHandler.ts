@@ -1,10 +1,10 @@
 import { sign, verify } from "jsonwebtoken";
 const JWT_SECRET = <string>process.env.JWT_SECRET;
 
-const tokenSign = async (name: string) => {
+const tokenSign = async (id: string) => {
   const jwt = sign(
     {
-      id: name,
+      id,
     },
     JWT_SECRET,
     {
